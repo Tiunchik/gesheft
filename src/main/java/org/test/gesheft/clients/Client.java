@@ -8,11 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static org.test.gesheft.clients.Client.FILTER;
+
 @Component
 @Entity(name = "client")
 @Table(uniqueConstraints =
         {@UniqueConstraint(columnNames = {"name", "surname"})})
+@NamedQuery(name = FILTER, query = "select c from client c where name like ?1 or surname like ?1")
 public class Client {
+
+    public static final String FILTER = "Client.filter";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
